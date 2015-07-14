@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RehberModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RehberModelStoreContainer">
+    <EntitySet Name="Departman" EntityType="RehberModel.Store.Departman" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="RehberModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRoles" EntityType="RehberModel.Store.UserRoles" store:Type="Tables" store:Schema="dbo" store:Name="UserRoles">
+      <DefiningQuery>SELECT 
+      [UserRoles].[UserId] AS [UserId], 
+      [UserRoles].[RoleId] AS [RoleId]
+      FROM [dbo].[UserRoles] AS [UserRoles]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Users" EntityType="RehberModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__UserRoles__RoleI__6FE99F9F" Association="RehberModel.Store.FK__UserRoles__RoleI__6FE99F9F">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRoles__UserI__6EF57B66" Association="RehberModel.Store.FK__UserRoles__UserI__6EF57B66">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departman">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="int" Nullable="false" />
+    <Property Name="DeptAdi" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\USERS\DREN\DOCUMENTS\VISUAL STUDIO 2012\PROJECTS\REHBER\REHBER\APP_DATA\REHBER.MDF.dbo.UserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Isim" Type="nvarchar" MaxLength="50" />
+    <Property Name="Soyisim" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+    <Property Name="Departman" Type="varchar" MaxLength="50" />
+    <Property Name="Rol" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK__UserRoles__RoleI__6FE99F9F">
+    <End Role="Roles" Type="RehberModel.Store.Roles" Multiplicity="1" />
+    <End Role="UserRoles" Type="RehberModel.Store.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRoles__UserI__6EF57B66">
+    <End Role="Users" Type="RehberModel.Store.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="RehberModel.Store.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

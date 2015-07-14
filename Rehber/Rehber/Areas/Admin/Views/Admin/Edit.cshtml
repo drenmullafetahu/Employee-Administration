@@ -1,0 +1,70 @@
+﻿@model Rehber.User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    
+    @Html.ValidationSummary(true)    
+        <legend>User</legend>
+
+        @Html.HiddenFor(model => model.UserId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username)        
+            @Html.EditorFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password)        
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Isim)        
+            @Html.EditorFor(model => model.Isim)
+            @Html.ValidationMessageFor(model => model.Isim)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Soyisim)        
+            @Html.EditorFor(model => model.Soyisim)
+            @Html.ValidationMessageFor(model => model.Soyisim)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefon)        
+            @Html.EditorFor(model => model.Telefon)
+            @Html.ValidationMessageFor(model => model.Telefon)
+        </div>
+
+        <div class="form-group">
+           <label for="sel1">Departman (birini secin):</label>
+            @Html.DropDownList("Departman", new List<SelectListItem> { 
+                new SelectListItem{Text="Finans", Value="Finans"},
+                new SelectListItem{Text="Yonetim", Value="Yonetim"},
+                new SelectListItem{Text="Uretim", Value="Uretim"},
+                new SelectListItem{Text="SatinAlma", Value="SatinAlma"},
+                new SelectListItem{Text="Pazarlama", Value="Pazarlama"}
+                }, "Departman Sec")
+        </div>
+        <div class="form-group">
+           <label for="sel2">Rol (birini secin):</label>
+            @Html.DropDownList("Rol", new List<SelectListItem> { 
+            new SelectListItem{Text="Admin", Value="Admin"},
+            new SelectListItem{Text="Public", Value="Public"}
+            }, "Rol Sec")
+        </div>
+
+     
+
+       <input type="submit" class="btn btn-primary" value="Guncelle" /> <a href="@Url.Action("index")"> Geri Don</a>
+    
+}
+
+

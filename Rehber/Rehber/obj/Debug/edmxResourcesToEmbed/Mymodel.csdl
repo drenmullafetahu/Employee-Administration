@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RehberModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RehberEntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Departmen" EntityType="RehberModel.Departman" />
+    <EntitySet Name="Roles" EntityType="RehberModel.Role" />
+    <EntitySet Name="Users" EntityType="RehberModel.User" />
+    <AssociationSet Name="UserRoles" Association="RehberModel.UserRoles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departman">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <Property Name="DeptAdi" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="RehberModel.UserRoles" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Isim" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Soyisim" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Departman" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Type="String" Name="Rol" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Roles" Relationship="RehberModel.UserRoles" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="UserRoles">
+    <End Type="RehberModel.Role" Role="Role" Multiplicity="*" />
+    <End Type="RehberModel.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>

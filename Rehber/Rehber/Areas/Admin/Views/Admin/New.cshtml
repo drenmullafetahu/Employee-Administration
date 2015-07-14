@@ -1,0 +1,59 @@
+﻿@model Rehber.Areas.Admin.ViewModels.UsersNew
+@{
+    ViewBag.Title = "New";
+}
+<h1>New User</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+    {
+    
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Username)
+        @Html.TextBoxFor(x => x.Username, new {@class="form-control" })
+    </div>
+   
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Password)
+        @Html.TextBoxFor(x => x.Password, new {@class="form-control",type="password" })
+    </div>
+    
+    
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Isim)
+        @Html.TextBoxFor(x => x.Isim, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Soyisim)
+        @Html.TextBoxFor(x => x.Soyisim, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Telefon)
+        @Html.TextBoxFor(x => x.Telefon, new {@class="form-control" })
+    </div>
+        
+    <div class="form-group">
+        <label for="sel1">Departman (birini secin):</label>
+        @Html.DropDownList("Departman", new List<SelectListItem> { 
+            new SelectListItem{Text="Finans", Value="Finans"},
+            new SelectListItem{Text="Yonetim", Value="Yonetim"},
+            new SelectListItem{Text="Uretim", Value="Uretim"},
+            new SelectListItem{Text="SatinAlma", Value="SatinAlma"},
+            new SelectListItem{Text="Pazarlama", Value="Pazarlama"}
+            }, "Departman Sec")
+
+    </div>   
+       
+     <div class="form-group">
+        <label for="sel2">Rol (birini secin):</label>
+        @Html.DropDownList("Rol", new List<SelectListItem> { 
+            new SelectListItem{Text="Admin", Value="Admin"},
+            new SelectListItem{Text="Public", Value="Public"}
+            }, "Rol Sec")
+
+    </div>   
+    <br />
+    <input type="submit" class="btn btn-primary" value="Calisan Ekle" /> <a href="@Url.Action("index")"> Geri Don</a>
+    }

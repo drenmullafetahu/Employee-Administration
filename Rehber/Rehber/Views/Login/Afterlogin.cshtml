@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Rehber.User> 
+@{
+    ViewBag.Title = "Afterlogin";
+}
+
+<h2>Public UI</h2>
+@if (User.Identity.IsAuthenticated)
+    { // user is authenticated
+        <a href="@Url.Action("login")" class="btn btn-primary btn-bg"><i class="glyphicon glyphicon-home"></i>   Cikis Yap</a>
+       
+        if (User.IsInRole("admin")) //user is an admin
+        {            
+            <a href="@Url.Action("index", "Admin", new { area="admin"})" class="btn btn-primary btn-bg"><i class="glyphicon glyphicon-user"></i>   Admin Sayfasina Git</a>
+        }
+        
+       
+    }
+    else
+    { // user is not authenticated
+        @Html.RouteLink("Login","Login")
+    }
+
+@*@if (Session["LogedUserUsername"] != null) 
+{ 
+   
+}*@
+
+<div class="container">
+    <h2>Calisan Listesi</h2>
+    <p>Bu kisim yalniz genel calisanlara yoneliktir</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Isim</th>
+                <th>Soyisim</th>
+                <th>Telefon</th>
+            </tr>
+        </thead>
+        <tbody>
+             @foreach (var a in Model) {
+            <tr>
+                
+                    <td>@a.Isim</td>
+                    <td>@a.Soyisim</td>
+                    <td>@a.Telefon</td>
+               
+            </tr>
+                }
+            
+        </tbody>
+    </table>
+
+</div>

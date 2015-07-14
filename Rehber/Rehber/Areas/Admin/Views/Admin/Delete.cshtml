@@ -1,0 +1,73 @@
+﻿@model Rehber.User
+
+<h3>Are you sure you want to delete @Model.Isim ?</h3>
+<legend>User</legend>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>Username</th>
+            <th>Password</th>
+            <th>Isim</th>
+            <th>Soyisim</th>
+            <th>Telefon Numarasi</th>
+            <th>Departman</th>
+            <th>Rol</th>
+
+            
+         </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="form-group">
+                    
+                    @Html.DisplayFor(model => model.Username)
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                   
+                    @Html.DisplayFor(model => model.Password)
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                   
+                    @Html.DisplayFor(model => model.Isim)
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                   
+                    @Html.DisplayFor(model => model.Soyisim)
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                   
+                    @Html.DisplayFor(model => model.Telefon)
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                   
+                    @Html.DisplayFor(model => model.Departman)
+                </div>
+            </td>            
+            <td>
+                <div class="form-group">
+                    
+                     @Html.DisplayFor(model => model.Rol)
+                </div>
+            </td>
+        </tr>
+    </tbody>
+
+</table>       
+
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" class="btn btn-xs btn-danger" value="Calisan Sil" /><a href="@Url.Action("index")"> Geri Don</a>
+    </p>
+}

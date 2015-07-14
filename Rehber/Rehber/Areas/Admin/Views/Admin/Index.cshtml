@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Rehber.User> 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Calisan Listesi</h2>
+
+<div class="btn-toolbar">
+    <a href="@Url.Action("new")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Calisan Ekle</a>
+    <a href="@Url.RouteUrl("Afterlogin")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-home"></i> Ana Sayfa</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>Username</th>
+            <th>Password</th>
+            <th>Isim</th>
+            <th>Soyisim</th>
+            <th>Telefon Numarasi</th>
+            <th>Departman</th>
+            <th>Rol</th>
+            
+         </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                
+                <td>@user.Username</td>
+                <td>@user.Password</td>
+                <td>@user.Isim</td>                
+                <td>@user.Soyisim</td>
+                <td>@user.Telefon</td>
+                <td>@user.Departman</td>
+                <td>@user.Rol</td>
+                
+                <td>
+
+                    <div class="btn-group">
+                           <a href="@Url.Action("Edit", new { id=user.UserId })" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Guncelle</a>
+                           @*<a href="@Url.Action("ResetPassword",new {id=user.UserId})" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-lock"></i>Reset Password</a>*@
+                           <a href="@Url.Action("Delete", new {id=user.UserId})" class="btn btn-xs btn-danger" data-posts="Are you sure do want to delete @user.Isim"><i class="glyphicon glyphicon-remove"></i> Sil  </a>
+                    </div>
+                </td>
+            </tr>
+        }
+            
+    </tbody>
+</table>
